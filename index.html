@@ -12,7 +12,7 @@
 	var sound = 0;
 	var sound2 = 0;
 	var AudioNullSum;
-	var nowSec_prev = 0;
+	var nowMilli_prev = 0;
 		
 	//se001
     AFRAME.registerComponent('se001', {
@@ -63,13 +63,13 @@
 		let nowMilli  = nowTime.getMilliseconds();
 		let msg = "現在時刻：" + nowHour + ":" + nowMin + ":" + nowSec + ":" + nowMilli ;
     	document.getElementById("realtime").innerHTML = msg;
-		//if(nowSec_prev != nowSec){
+		if(nowMilli_prev != nowMilli){
   			if(0 < AudioNullSum) audio.play();
 			var mokugyo = new Audio('assets/mokugyo.mp3');
 			mokugyo.play();
 			document.getElementById("box").emit('anim');
-		//}
-		nowSec_prev = nowSec;
+		}
+		nowMilli_prev = nowSec;
 	}
     setInterval('showClock()',500);
 </script>
@@ -110,7 +110,7 @@
       		<a-entity camera></a-entity>
     	</a-scene>
 		
-		<p id="realtime"></p>
+		<h id="realtime"></h>
 <!--
 		<button id="playButton">音を鳴らす</button>
 		<script>
