@@ -13,6 +13,7 @@
 	var sound2 = 0;
 	var AudioNullSum;
 	var nowMilli_prev = 0;
+	var mokugyo = new Audio('assets/mokugyo.mp3');
 		
 	//se001
     AFRAME.registerComponent('se001', {
@@ -43,7 +44,6 @@
                 var markerId = marker.id;
                 console.log('markerFound', markerId);
 				audio = new Audio('assets/sound2.mp3');
-				eisho();
 				sound2 = 1;
             });
             // マーカーを見失ったイベントの登録
@@ -67,6 +67,10 @@
 //		nowMilli_prev = nowSec;
 		//setTimeout('showClock()',500);
 	}
+	function moku(){
+		mokugyo.play();
+		setTimeout('moku()',1000);
+	}
 	function showClock(){
 		var nowTime = new Date();
 		var nowHour = nowTime.getHours();
@@ -78,6 +82,7 @@
 		setTimeout('showClock()',10);
 	}
     setTimeout('showClock()',10);
+	setTimeout('moku()',1000);
 		
 </script>
 	
