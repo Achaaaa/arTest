@@ -63,15 +63,15 @@
 		let nowMilli  = nowTime.getMilliseconds();
 		let msg = "現在時刻：" + nowHour + ":" + nowMin + ":" + nowSec + ":" + nowMilli ;
     	document.getElementById("realtime").innerHTML = msg;
-		if(nowSec_prev != nowSec){
+		//if(nowSec_prev != nowSec){
   			if(0 < AudioNullSum) audio.play();
 			var mokugyo = new Audio('assets/mokugyo.mp3');
 			mokugyo.play();
 			document.getElementById("box").emit('anim');
-		}
+		//}
 		nowSec_prev = nowSec;
 	}
-    setInterval('showClock()',1);
+    setInterval('showClock()',1000);
 </script>
 	
 <!---------------------------------------------------------------------------------------------------------->
