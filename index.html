@@ -54,18 +54,23 @@
             });
         }
     });
-	AudioNullSum = sound + sound2;
 
 	function eisho() {
-  		if(0 < AudioNullSum) audio.play();
-//			document.getElementById("box").emit('anim');
+  		if(0 < AudioNullSum){
+			audio.play();
+			console.log("eisho!!!");
 		}
+		setTimeout('eisho()',1000);
+//		document.getElementById("box").emit('anim');
+	}
 //		nowMilli_prev = nowSec;
 		//setTimeout('showClock()',500);
-	}
+		//}
 	function moku(){
 		mokugyo.play();
+		AudioNullSum = sound + sound2;
 		setTimeout('moku()',1000);
+		console.log("Status:" + AudioNullSum);
 	}
 	function showClock(){
 		var nowTime = new Date();
