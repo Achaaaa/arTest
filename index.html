@@ -12,8 +12,10 @@
 	var sound = 0;
 	var sound2 = 0;
 	var AudioNullSum;
-	var nowMilli_prev = 0;
 	var mokugyo = new Audio('assets/mokugyo.mp3');
+	var hasStarted = false;
+	var pitari;
+	var nowSec_prev;
 		
 	//se001
     AFRAME.registerComponent('se001', {
@@ -70,7 +72,7 @@
 	function moku(){
 		mokugyo.play();
 		AudioNullSum = sound + sound2;
-		setTimeout('moku()',1000);
+		//setTimeout('moku()',1000);
 		console.log("Status:" + AudioNullSum);
 	}
 	function showClock(){
@@ -82,10 +84,21 @@
 		let msg = "現在時刻：" + nowHour + ":" + nowMin + ":" + nowSec + ":" + nowMilli ;
 		document.getElementById("realtime").innerHTML = msg;
 		setTimeout('showClock()',10);
+		if(nowSec != nowSec_prev){
+			pitari = true; 
+			setTimeout('moku()',1000);
+			console.log("Pitari!");
+		}else{
+			pitari = false; 
+		}
+		nowSec_prev = nowSec;
 	}
     setTimeout('showClock()',10);
-	setTimeout('moku()',1000);
-	setTimeout('eisho()',1000);
+	if(hasStarted == false && pitari == true){
+		setTimeout('moku()',1000);
+		setTimeout('eisho()',1000);	
+		hasStarted = true;
+	}
 		
 </script>
 	
