@@ -55,15 +55,11 @@
         }
     });
 	AudioNullSum = sound + sound2;
+
 	function eisho() {
-		console.log("Hi");
-		audio.play();
-//		if(nowMilli_prev != nowMilli){
-//  			if(0 < AudioNullSum) audio.play();
-//			var mokugyo = new Audio('assets/mokugyo.mp3');
-//			mokugyo.play();
+  		if(0 < AudioNullSum) audio.play();
 //			document.getElementById("box").emit('anim');
-//		}
+		}
 //		nowMilli_prev = nowSec;
 		//setTimeout('showClock()',500);
 	}
@@ -83,6 +79,7 @@
 	}
     setTimeout('showClock()',10);
 	setTimeout('moku()',1000);
+	setTimeout('eisho()',1000);
 		
 </script>
 	
@@ -122,7 +119,7 @@
       		<a-entity camera></a-entity>
     	</a-scene>
 		
-		<h id="realtime"></h>
+		<h id="realtime" style="position:absolute;　top: -200px;　left: 300px;"></h>
 <!--
 		<button id="playButton">音を鳴らす</button>
 		<script>
