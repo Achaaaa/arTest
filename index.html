@@ -6,6 +6,7 @@
     	<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     	<!-- AR.js を読み込む -->
     	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     </head>
 	<script>
 	var audio;
@@ -16,6 +17,29 @@
 	var hasStarted = false;
 	var pitari;
 	var nowSec_prev;
+	
+	$(function() {
+	var now; //タイムスタンプ用変数
+	$.getJSON('datetime.php') // json読み込み開始（ファイルパスは適宜通してください）
+	  .done(function(json){ // jsonの読み込みに成功した時
+		  for(var i in json){
+		    now = json[i] * 1000;//PHPのタイムスタンプを1000倍に
+		  }
+	  })
+	  .fail(function(){ // jsonの読み込みに失敗した時
+	    console.log('json_error');
+	  });
+
+	function showtime(){
+	  today = new Date(now);
+	  $weekday = ['日','月','火','水','木','金','土'];
+	  month = today.getMonth() + 1 ;
+	  $('#datetime').html(month + "月"+ today.getDate() + "日（" + $weekday[today.getDay()] +"） " +today.getHours() + ":" + ('0'+today.getMinutes()).slice(-2) + ":" + ('0' +today.getSeconds()).slice(-2));
+	  now += 1000;
+	}
+	setInterval(showtime,1000);
+
+	});
 		
 	//se001
     AFRAME.registerComponent('se001', {
@@ -138,7 +162,8 @@
       		<a-entity camera></a-entity>
     	</a-scene>
 		
-		<h id="realtime" style="position:absolute;　top: -200px;　left: 300px;"></h>
+<!--		<h id="realtime" style="position:absolute;　top: -200px;　left: 300px;"></h>-->
+		<div id="datetime"></div>
 <!--
 		<button id="playButton">音を鳴らす</button>
 		<script>
